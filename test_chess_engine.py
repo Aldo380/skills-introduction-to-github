@@ -56,6 +56,11 @@ class TestChessEngine(unittest.TestCase):
         self.assertEqual(self.engine.parse_position('i9'), (None, None))
         self.assertEqual(self.engine.parse_position('a0'), (None, None))
         self.assertEqual(self.engine.parse_position(''), (None, None))
+        
+        # Test invalid input that could cause ValueError
+        self.assertEqual(self.engine.parse_position('a@'), (None, None))
+        self.assertEqual(self.engine.parse_position('ez'), (None, None))
+        self.assertEqual(self.engine.parse_position('1a'), (None, None))
     
     def test_valid_pawn_move(self):
         """Test pawn movement rules."""

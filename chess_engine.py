@@ -70,10 +70,13 @@ class ChessEngine:
         """Convert chess notation (e.g., 'e2') to board coordinates."""
         if len(pos) != 2:
             return None, None
-        col = ord(pos[0].lower()) - ord('a')
-        row = 8 - int(pos[1])
-        if self.is_valid_position(row, col):
-            return row, col
+        try:
+            col = ord(pos[0].lower()) - ord('a')
+            row = 8 - int(pos[1])
+            if self.is_valid_position(row, col):
+                return row, col
+        except (ValueError, IndexError):
+            return None, None
         return None, None
     
     def is_valid_pawn_move(self, from_row, from_col, to_row, to_col, piece):
